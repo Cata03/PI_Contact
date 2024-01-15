@@ -1,0 +1,179 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.37.32824.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/registerdlg.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "2b6f49bba0762d01ba8a9280ff196801d3a9f5a6fd7070fe9a57a268deb2efb4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/pch.h"
+          },
+          "hashes": {
+            "sha-256": "c2d8c468b0dd828eaa49a609c5e54ebca95ea4d2de3cd390e968e01c5d7f79ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/framework.h"
+          },
+          "hashes": {
+            "sha-256": "3fbdf2536ce3b71811d81172bb1ccc2d58b44b569326433f3ca10477e724c4a4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/targetver.h"
+          },
+          "hashes": {
+            "sha-256": "a2761fdbd4c8925741ddea678ee8398de930207e447666bc6a76d5f72684c04f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/contactmanager.h"
+          },
+          "hashes": {
+            "sha-256": "2b8b8e1d87202d0884ff53168e52d2fb54ef409e6a4b7f0a0b8eafba8438b56d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/resource.h"
+          },
+          "hashes": {
+            "sha-256": "b0d620bdb83f6641266d314888975e172b6bbe1cc83b50bf98a75d35770a9992"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/fladn/desktop/proiect_pi/contactmanager/registerdlg.h"
+          },
+          "hashes": {
+            "sha-256": "9e6a836fcfb1a62123ac03848d3ff76af394813681877275155e58f7ace442f6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql.h"
+          },
+          "hashes": {
+            "sha-256": "b4d2a210aa1945edeee9a77c07345d4e8d6d080e5db0d884405f3377d77ba632"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/field_types.h"
+          },
+          "hashes": {
+            "sha-256": "37fe1e80f64382885e7a6d88ce2175c9486fffaac08597a0ae1be05cbdcf0cb6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/my_list.h"
+          },
+          "hashes": {
+            "sha-256": "496cf5b562d1607ac2e65d011d9edfa5dc68de9df38532424bc95c0af09fc813"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql_com.h"
+          },
+          "hashes": {
+            "sha-256": "a126cf751daaeaac83464412ee74861f8c60649350173a271c0b3462747cd5f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/my_command.h"
+          },
+          "hashes": {
+            "sha-256": "6a6d670d37a58e204944e94c753188e0f150ef71572aea252e330d468c2c2fde"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/my_compress.h"
+          },
+          "hashes": {
+            "sha-256": "358a37e537ff26946ea69978830baa635c62961a8f11598ff195d83633dc1c9e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql/udf_registration_types.h"
+          },
+          "hashes": {
+            "sha-256": "4c24b4afbc16a003ae454a05e71a762cb148afd63d15a475cf589f004aa878bf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql/client_plugin.h"
+          },
+          "hashes": {
+            "sha-256": "e76b5742c35285e2f86ac4618be54354ad86fc84a695ae3c026d278e8357ff46"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql/plugin_auth_common.h"
+          },
+          "hashes": {
+            "sha-256": "1f2435f9aef0dbbb1676ebc5aba1d88770917a740e5a6b0f35a74bbe831cf5ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql_version.h"
+          },
+          "hashes": {
+            "sha-256": "58a996144debf6457f34c7a69098b2024fac809d94139663a10e22af94e8dc57"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/mysql_time.h"
+          },
+          "hashes": {
+            "sha-256": "cb49bafec1cb5e366d5749fd8c7519669022017cee8420aaeccde533498f7c93"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/program files/mysql/mysql server 8.0/include/errmsg.h"
+          },
+          "hashes": {
+            "sha-256": "41434d79654c56b206608a67fe27f273782ad824866dfbdd4802de38323144d4"
+          }
+        }
+      ]
+    }
+  ]
+}
