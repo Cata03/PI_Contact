@@ -11,7 +11,6 @@ class CContactManagerDlg : public CDialogEx
 // Construction
 public:
 	CContactManagerDlg(CWnd* pParent = nullptr);	// standard constructor
-
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CONTACTMANAGER_DIALOG };
@@ -35,4 +34,7 @@ public:
 	CString m_strUsername;
 	CString m_strPassword;
 	afx_msg void OnBnClickedLoginButton();
+	afx_msg void OnBnClickedRegisterButton();
+	CString CaesarEncrypt(const CString& input, int shift);
+	CString CaesarDecrypt(const CString& encrypted, int shift);
 };

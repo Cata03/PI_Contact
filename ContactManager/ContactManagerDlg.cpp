@@ -8,7 +8,8 @@
 #include "ContactManagerDlg.h"
 #include "afxdialogex.h"
 #include "mysql.h"
-
+#include "RegisterDlg.h"
+#include "MainDlg.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -70,11 +71,34 @@ BEGIN_MESSAGE_MAP(CContactManagerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_LOGIN_BUTTON, &CContactManagerDlg::OnBnClickedLoginButton)
+    ON_BN_CLICKED(IDC_REGISTER_BUTTON, &CContactManagerDlg::OnBnClickedRegisterButton)
 END_MESSAGE_MAP()
 
+CString CContactManagerDlg::CaesarEncrypt(const CString& input, int shift) {
+    CString encrypted;
+
+    for (int i = 0; i < input.GetLength(); ++i) {
+        TCHAR ch = input[i];
+
+        // Only shift alphabetical characters
+        if (_istalpha(ch)) {
+            TCHAR baseChar = (_istlower(ch) ? 'a' : 'A');
+            TCHAR encryptedChar = (ch - baseChar + shift) % 26 + baseChar;
+            encrypted.AppendChar(encryptedChar);
+        }
+        else {
+            encrypted.AppendChar(ch);
+        }
+    }
+
+    return encrypted;
+}
+
+CString CContactManagerDlg::CaesarDecrypt(const CString& encrypted, int shift) {
+    return CaesarEncrypt(encrypted, -shift);  // Decryption is the same as encryption with a negative shift
+}
 
 // CContactManagerDlg message handlers
-
 BOOL CContactManagerDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
@@ -166,44 +190,34 @@ void CContactManagerDlg::OnBnClickedLoginButton()
     try {
         MYSQL* con = mysql_init(NULL);
 
-        if (con == NULL)
-        {
+        if (con == NULL) {
             fprintf(stderr, "Error initializing MySQL connection: %s\n", mysql_error(con));
             AfxMessageBox(_T("An error occurred while initializing the connection. Please try again later."));
             return;
         }
 
-        if (mysql_real_connect(con, "localhost", "root", "root", NULL, 0, NULL, 0) == NULL)
-        {
+        if (mysql_real_connect(con, "localhost", "root", "root", NULL, 0, NULL, 0) == NULL) {
             fprintf(stderr, "Error connecting to MySQL server: %s\n", mysql_error(con));
             AfxMessageBox(_T("Failed to connect to the MySQL server. Please check your connection and try again."));
             mysql_close(con);
             return;
         }
 
-        if (mysql_query(con, "USE appcontacte"))
-        {
+        if (mysql_query(con, "USE appcontacte")) {
             fprintf(stderr, "Error selecting database: %s\n", mysql_error(con));
             AfxMessageBox(_T("Failed to select the database. Please try again later."));
             mysql_close(con);
             return;
         }
 
-        // Build the login query using the entered username and password
+        // Build the login query using the entered username
         CStringA usernameA(m_strUsername);
-        CStringA passwordA(m_strPassword);
-        CStringA query;
-        query.Format("SELECT * FROM users WHERE Username='%s' AND PasswordHash='%s'",
-            usernameA.GetString(), passwordA.GetString());
 
-        // Debug output
-        CString debugMsg;
-        debugMsg.Format(_T("Username: %s, PasswordHash: %s"), m_strUsername, m_strPassword);
-        AfxMessageBox(debugMsg);
+        CStringA query;
+        query.Format("SELECT * FROM users WHERE Username='%s'", usernameA.GetString());
 
         // Execute the login query
-        if (mysql_real_query(con, query, static_cast<unsigned long>(query.GetLength())))
-        {
+        if (mysql_real_query(con, query, static_cast<unsigned long>(query.GetLength()))) {
             fprintf(stderr, "Error executing login query: %s\n", mysql_error(con));
             AfxMessageBox(_T("An error occurred during login. Please try again later."));
             mysql_close(con);
@@ -211,8 +225,7 @@ void CContactManagerDlg::OnBnClickedLoginButton()
         }
 
         MYSQL_RES* res = mysql_store_result(con);
-        if (res == NULL)
-        {
+        if (res == NULL) {
             fprintf(stderr, "Error storing login query result: %s\n", mysql_error(con));
             AfxMessageBox(_T("An error occurred during login. Please try again later."));
             mysql_close(con);
@@ -224,15 +237,24 @@ void CContactManagerDlg::OnBnClickedLoginButton()
 
         // Check if there is at least one result
         if ((row = mysql_fetch_row(res)) != NULL) {
-            // Successful login
-            AfxMessageBox(_T("Login successful!"));
+            // Check if the password is empty
+            CStringA storedPassword(row[1] ? row[1] : ""); // Assuming the password is in the second column
 
-            // Optionally, close the login dialog
-            EndDialog(IDOK);
+            if (storedPassword.IsEmpty()) {
+                AfxMessageBox(_T("Login successful! (No password required)"));
+            }
+            else {
+                AfxMessageBox(_T("Login successful!"));
 
-            // Open the main page or switch to a new dialog
-            // CMainPageDlg mainPageDlg;
-            // mainPageDlg.DoModal();
+                // Optionally, close the login dialog
+                EndDialog(IDOK);
+
+                // Open the main page or switch to a new dialog
+                MainDlg mainPageDlg(nullptr, m_strUsername);  // Pass the logged-in username to MainDlg
+                if (mainPageDlg.DoModal() == IDOK) {
+                    // Handle any actions after the MainDlg is closed
+                }
+            }
         }
         else {
             // Failed login
@@ -247,4 +269,24 @@ void CContactManagerDlg::OnBnClickedLoginButton()
         // Handle any other errors
         AfxMessageBox(_T("An unexpected error occurred. Please try again later."));
     }
+}
+
+
+
+
+
+void CContactManagerDlg::OnBnClickedRegisterButton()
+{
+    // TODO: Add your control notification handler code here
+    // Create an instance of the RegisterDlg
+    RegisterDlg* pRegisterDlg = new RegisterDlg(this);
+
+    // Show the RegisterDlg and wait for it to close
+    if (pRegisterDlg->DoModal() == IDOK)
+    {
+        // Handle any actions after the dialog is closed
+    }
+
+    // Delete the RegisterDlg instance
+    delete pRegisterDlg;
 }
